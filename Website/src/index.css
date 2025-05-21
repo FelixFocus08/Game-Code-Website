@@ -1,0 +1,172 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 9%; /* Dunklerer Hintergrund */
+    --foreground: 210 40% 98%;
+    
+    --card: 220 20% 13%; /* Etwas hellere Karten */
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 220 20% 9%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 260 100% 70%; /* Lebendigeres Primärblau/Lila */
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 220 15% 25%; /* Gedämpftes Sekundär */
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 220 15% 20%; /* Dunkleres Muted */
+    --muted-foreground: 220 10% 60%; /* Helleres Muted Foreground */
+    
+    --accent: 220 15% 25%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 70% 55%; /* Intensiveres Rot */
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 15% 20%; /* Dunklere Grenze */
+    --input: 220 15% 18%; /* Dunklere Eingabefelder */
+    --ring: 260 100% 75%; /* Ringfarbe passend zu Primary */
+    
+    --radius: 0.75rem; /* Etwas größerer Radius für weichere Kanten */
+  }
+
+  .dark {
+    --background: 220 20% 9%;
+    --foreground: 210 40% 98%;
+    --card: 220 20% 13%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 20% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 260 100% 70%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 220 15% 25%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 260 100% 75%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(280, 87%, 65%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-hover {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px -8px hsla(var(--primary), 0.3), 0 4px 8px -6px hsla(var(--primary), 0.2);
+}
+
+.glass-effect {
+  background: hsla(var(--background), 0.7); /* Angepasst an Theme-Farben */
+  backdrop-filter: blur(10px) saturate(180%);
+  border-bottom: 1px solid hsla(var(--border), 0.5);
+}
+
+.link-hover {
+  position: relative;
+  padding-bottom: 2px; /* Platz für die Linie */
+}
+
+.link-hover::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0; /* Linie direkt unter dem Text */
+  left: 50%; /* Startet in der Mitte */
+  transform: translateX(-50%); /* Zentriert die Linie */
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(280, 87%, 65%));
+  transition: width 0.3s ease-out;
+}
+
+.link-hover:hover::after {
+  width: 100%;
+}
+
+/* Animationen für das Hero Section Bild */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes blob {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.7;
+  }
+  33% {
+    transform: scale(1.1) translate(20px, -30px);
+    opacity: 0.5;
+  }
+  66% {
+    transform: scale(0.9) translate(-15px, 25px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.7;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.7);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Button Hover Effect */
+.btn-shine:hover {
+  box-shadow: 0 0 15px 3px hsla(var(--primary), 0.5);
+}
+
