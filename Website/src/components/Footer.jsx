@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Github, Twitter, Twitch, Mail, Heart } from "lucide-react";
+import { Github, Instagram, Twitch, Mail, Heart, Youtube } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
 
@@ -13,12 +13,21 @@ const Footer = () => {
     { name: "Coding", path: "/coding" },
     { name: "Tipps & Tricks", path: "/tips" },
     { name: "Tickets", path: "/tickets" },
+    { name: "Partner", path: "/partners" },
+    { name: "Changelog", path: "/changelog" },
+    { name: "Social Stats", path: "/social-stats" },
+    { name: "YouTube Kanäle", path: "/youtube-channels" },
+    { name: "GitHub Profile", path: "/github-profiles" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Glossar", path: "/glossary" },
+    { name: "Community Richtlinien", path: "/community-guidelines" },
   ];
   
   const socialLinks = [
-    { name: "GitHub", url: "https://github.com", icon: <Github className="h-5 w-5" /> },
-    { name: "Twitter", url: "https://twitter.com", icon: <Twitter className="h-5 w-5" /> },
-    { name: "Twitch", url: "https://twitch.tv", icon: <Twitch className="h-5 w-5" /> },
+    { name: "GitHub", internalPath: "/github-profiles", icon: <Github className="h-5 w-5" /> },
+    { name: "Instagram", url: "https://instagram.com/felig0r", icon: <Instagram className="h-5 w-5" /> },
+    { name: "Twitch", url: "https://twitch.tv/fel1g0r", icon: <Twitch className="h-5 w-5" /> },
+    { name: "YouTube", internalPath: "/youtube-channels", icon: <Youtube className="h-5 w-5" /> },
     { name: "Discord", url: "https://discord.gg/6ZPskNPHXC", icon: <FaDiscord className="h-5 w-5" /> },
     { name: "Email", url: "mailto:info@gamecodehub.de", icon: <Mail className="h-5 w-5" /> },
   ];
@@ -34,16 +43,27 @@ const Footer = () => {
             </p>
             <div className="mt-4 flex space-x-4">
               {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={link.name}
-                >
-                  {link.icon}
-                </a>
+                link.internalPath ? (
+                  <Link
+                    key={link.name}
+                    to={link.internalPath}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={link.name}
+                  >
+                    {link.icon}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={link.name}
+                  >
+                    {link.icon}
+                  </a>
+                )
               ))}
             </div>
           </div>

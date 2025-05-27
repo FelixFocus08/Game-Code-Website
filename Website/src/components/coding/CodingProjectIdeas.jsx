@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Lightbulb, Zap, Github } from "lucide-react";
+import { Lightbulb, Zap } from "lucide-react";
 
 const projectIdeas = [
   {
@@ -10,32 +10,32 @@ const projectIdeas = [
     description: "Erstelle eine dynamische Portfolio-Website mit React und Framer Motion, um deine Projekte und Fähigkeiten zu präsentieren.",
     difficulty: "Mittel",
     tags: ["React", "Frontend", "Framer Motion", "UI/UX"],
-    imgSrc: "https://images.unsplash.com/photo-1555099962-4199c345e546",
     imgAlt: "Laptop mit Code für eine Portfolio-Website",
+    imageDescription: "Eine moderne Portfolio Webseite auf einem Laptop Display, die verschiedene Projekte und Fähigkeiten ansprechend darstellt."
   },
   {
     title: "Aufgaben-Manager (To-Do App)",
     description: "Entwickle eine To-Do-App mit Funktionen wie Priorisierung, Fälligkeitsdaten und Benutzerauthentifizierung (z.B. mit localStorage oder Supabase).",
     difficulty: "Einsteiger",
     tags: ["JavaScript", "CRUD", "State Management", "Auth"],
-    imgSrc: "https://images.unsplash.com/photo-1522199670076-2852f80289c3",
     imgAlt: "Notizblock mit einer To-Do-Liste",
+    imageDescription: "Ein Notizblock mit einer handgeschriebenen To-Do-Liste, Stift daneben, symbolisiert Aufgabenmanagement."
   },
   {
     title: "Wetter-App mit API-Integration",
     description: "Baue eine Wetter-App, die aktuelle Wetterdaten von einer externen API (z.B. OpenWeatherMap) abruft und ansprechend darstellt.",
     difficulty: "Mittel",
     tags: ["API", "Async JavaScript", "Datenvisualisierung", "Frontend"],
-    imgSrc: "https://images.unsplash.com/photo-1530569677193-16817f82dff0",
     imgAlt: "Smartphone-Bildschirm mit einer Wettervorhersage-App",
+    imageDescription: "Ein Smartphone zeigt eine Wetter-App mit sonnigem Himmel und Temperaturanzeige für eine Stadt."
   },
   {
     title: "E-Commerce Produktseite",
     description: "Gestalte eine detaillierte Produktseite für einen fiktiven Online-Shop mit Bildgalerie, Produktvarianten und Warenkorb-Funktionalität (Client-seitig).",
     difficulty: "Fortgeschritten",
     tags: ["React", "E-Commerce", "UI Design", "State Management"],
-    imgSrc: "https://images.unsplash.com/photo-1585150478350-14ac2595319a",
     imgAlt: "Nahaufnahme eines Online-Shops auf einem Tablet",
+    imageDescription: "Ein Tablet zeigt eine E-Commerce Produktseite mit einem Sneaker, Preis und 'In den Warenkorb'-Button."
   },
 ];
 
@@ -55,7 +55,7 @@ const CodingProjectIdeas = () => {
           </CardHeader>
           <CardContent className="p-6 pt-0 flex-grow">
             <div className="aspect-[16/10] rounded-md overflow-hidden mb-4 shadow-inner">
-               <img  src={project.imgSrc} alt={project.imgAlt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://images.unsplash.com/photo-1699304296669-ccf495d8c952" />
+               <img  alt={project.imgAlt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://images.unsplash.com/photo-1697256200022-f61abccad430" />
             </div>
             <CardDescription className="text-muted-foreground text-sm leading-relaxed mb-4 min-h-[40px]">
               {project.description}

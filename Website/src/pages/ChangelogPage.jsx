@@ -1,12 +1,57 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { History, GitCommit, PlusCircle, Wrench, Zap } from "lucide-react";
+import { History, GitCommit, PlusCircle, Wrench, Zap, BookOpen, Users, MessageSquare, Palette, HelpCircle, Import, Sparkles, Wind, ShieldCheck, Settings2 } from "lucide-react";
 
 const changelogData = [
+  {
+    version: "1.2.4",
+    date: "2025-05-26",
+    title: "Admin-Panel Erweiterungen & UI-Feinschliff",
+    changes: [
+      { type: "improvement", description: "Admin-Seite: Bessere Struktur durch Tabs für Benutzer- & Ticketverwaltung.", icon: <Settings2 className="h-4 w-4 text-sky-500" /> },
+      { type: "new", description: "Admin-Seite: Funktion zum direkten Bearbeiten von Tickets im Panel hinzugefügt.", icon: <ShieldCheck className="h-4 w-4 text-emerald-500" /> },
+      { type: "improvement", description: "Admin-Seite: Konsistente Datumsformatierung und Status-Badges für Tickets.", icon: <Palette className="h-4 w-4 text-blue-500" /> },
+      { type: "improvement", description: "Allgemeine UI-Optimierungen für verbesserte Lesbarkeit und Nutzererfahrung.", icon: <Sparkles className="h-4 w-4 text-amber-500" /> },
+      { type: "fix", description: "Fehlender 'BookOpen' Icon Import in 'AnimatedBackground.jsx' korrigiert.", icon: <Import className="h-4 w-4 text-orange-500" /> },
+    ],
+  },
+  {
+    version: "1.2.3",
+    date: "2025-05-26",
+    title: "UI/UX Verfeinerungen & Performance-Optimierungen",
+    changes: [
+      { type: "improvement", description: "Optimierung der 'AnimatedBackground' Komponente für geschmeidigere Übergänge und verbesserte Seitenanpassung.", icon: <Wind className="h-4 w-4 text-teal-500" /> },
+      { type: "improvement", description: "Verbesserte Animationen und Layout-Konsistenz auf Inhaltsseiten (Gaming, Coding etc.).", icon: <Sparkles className="h-4 w-4 text-amber-500" /> },
+      { type: "improvement", description: "Kleinere Design-Anpassungen für bessere Lesbarkeit und visuelle Hierarchie.", icon: <Palette className="h-4 w-4 text-pink-500" /> },
+      { type: "fix", description: "Behebung kleinerer Anzeigefehler und Optimierung der Bild-Placeholder in Komponenten.", icon: <Wrench className="h-4 w-4 text-orange-500" /> },
+    ],
+  },
+  {
+    version: "1.2.2",
+    date: "2025-05-24",
+    title: "Farbliche Anpassungen & Fehlerbehebungen",
+    changes: [
+      { type: "improvement", description: "Farbschema der Gaming-Seite auf Schwarz & Lila aktualisiert.", icon: <Palette className="h-4 w-4 text-purple-500" /> },
+      { type: "improvement", description: "Farbschema der Coding-Seite auf Schwarz & Grün aktualisiert.", icon: <Palette className="h-4 w-4 text-green-500" /> },
+      { type: "fix", description: "Fehlenden 'AnimatePresence' Import auf der Coding-Seite korrigiert.", icon: <Import className="h-4 w-4 text-orange-500" /> },
+      { type: "fix", description: "Fehlenden 'HelpCircle' Icon Import auf der Changelog-Seite korrigiert.", icon: <Import className="h-4 w-4 text-orange-500" /> },
+    ],
+  },
+  {
+    version: "1.2.1",
+    date: "2025-05-24",
+    title: "Neue Informationsseiten & Bot-Optimierung",
+    changes: [
+      { type: "new", description: "FAQ-Seite mit häufig gestellten Fragen hinzugefügt.", icon: <HelpCircle className="h-4 w-4 text-sky-500" /> },
+      { type: "new", description: "Glossar-Seite zur Erklärung wichtiger Begriffe implementiert.", icon: <BookOpen className="h-4 w-4 text-indigo-500" /> },
+      { type: "new", description: "Community-Richtlinien-Seite für ein besseres Miteinander erstellt.", icon: <Users className="h-4 w-4 text-emerald-500" /> },
+      { type: "improvement", description: "Support-Bot: Funktionalität angepasst (Öffnen/Schließen per Button), Antworten optimiert und Links zu neuen Info-Seiten integriert.", icon: <MessageSquare className="h-4 w-4 text-blue-500" /> },
+      { type: "improvement", description: "Navigation (Navbar, Footer) um neue Seiten erweitert.", icon: <Zap className="h-4 w-4 text-blue-500" /> },
+      { type: "fix", description: "Fehlerbehebung bei Icon-Importen in der Navbar.", icon: <Wrench className="h-4 w-4 text-orange-500" /> },
+    ],
+  },
   {
     version: "1.2.0",
     date: "2025-05-19",
@@ -58,7 +103,8 @@ const changelogData = [
   },
 ];
 
-const getChangeIcon = (type) => {
+const getChangeIcon = (type, customIcon) => {
+  if (customIcon) return customIcon;
   switch (type) {
     case "new": return <PlusCircle className="h-4 w-4 text-green-500" />;
     case "improvement": return <Zap className="h-4 w-4 text-blue-500" />;
@@ -97,7 +143,7 @@ const ChangelogEntry = ({ version, date, title, changes, index }) => (
         <ul className="space-y-3">
           {changes.map((change, idx) => (
             <li key={idx} className="flex items-start gap-3">
-              <span className="mt-1">{getChangeIcon(change.type)}</span>
+              <span className="mt-1">{getChangeIcon(change.type, change.icon)}</span>
               <div>
                 <Badge variant={getChangeBadgeVariant(change.type)} className="mr-2 capitalize text-xs">{change.type}</Badge>
                 <span className="text-muted-foreground">{change.description}</span>

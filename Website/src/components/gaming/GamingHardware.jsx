@@ -1,23 +1,22 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Cpu, MonitorPlay, Mouse, Keyboard, Headphones as Headset } from 'lucide-react';
+import { Cpu, MonitorPlay, Mouse } from 'lucide-react';
 
 const hardwareItems = [
   {
     title: "Gaming-PCs 2025: Kaufberatung",
     description: "Unsere umfassende Kaufberatung für Gaming-PCs in verschiedenen Preisklassen, mit Empfehlungen für Komponenten und Fertig-PCs.",
-    imgSrc: "https://images.unsplash.com/photo-1689170912270-2170c18d5597",
     imgAlt: "Moderner Gaming PC mit RGB-Beleuchtung",
+    imageDescription: "Ein leistungsstarker Gaming-PC mit transparenter Seitenwand, RGB-beleuchteten Lüftern und Komponenten.",
     linkText: "Zur Kaufberatung",
     icon: <Cpu className="h-6 w-6 text-primary" />
   },
   {
     title: "Gaming-Peripherie im Test",
     description: "Wir testen die neuesten Gaming-Mäuse, Tastaturen, Headsets und Monitore und geben Empfehlungen für verschiedene Spielgenres.",
-    imgSrc: "https://images.unsplash.com/photo-1651599731800-96d134e0c986",
     imgAlt: "Set aus Gaming-Maus, Tastatur und Headset",
+    imageDescription: "Ein Set aus schwarzer Gaming-Maus, mechanischer Tastatur und Headset mit RGB-Beleuchtung auf einem Schreibtisch.",
     linkText: "Zu den Tests",
     icon: <Mouse className="h-6 w-6 text-primary" />
   },
@@ -67,7 +66,7 @@ const GamingHardware = () => {
           <Card key={index} className="card-hover border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden shadow-lg hover:shadow-primary/20 transition-all duration-300 ease-out flex flex-col">
             <CardHeader className="p-0">
               <div className="aspect-video overflow-hidden">
-                <img  src={item.imgSrc} alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                <img  alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://images.unsplash.com/photo-1675023112817-52b789fd2ef0" />
               </div>
               <div className="p-6 flex items-center gap-3">
                 {item.icon}

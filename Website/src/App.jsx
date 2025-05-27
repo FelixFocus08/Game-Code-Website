@@ -1,9 +1,9 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { motion } from "framer-motion";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { SettingsProvider } from "@/contexts/SettingsContext"; // Import SettingsProvider
 
 // Layouts
 import Layout from "@/components/Layout";
@@ -21,6 +21,11 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import PartnerPage from "@/pages/PartnerPage";
 import ChangelogPage from "@/pages/ChangelogPage";
 import SocialStatsPage from "@/pages/SocialStatsPage";
+import YouTubeChannelsPage from "@/pages/YouTubeChannelsPage";
+import GitHubProfilesPage from "@/pages/GitHubProfilesPage";
+import FAQPage from "@/pages/FAQPage";
+import GlossaryPage from "@/pages/GlossaryPage";
+import CommunityGuidelinesPage from "@/pages/CommunityGuidelinesPage";
 
 const ProtectedRoute = ({ children, roles }) => {
   const { user } = useAuth();
@@ -50,6 +55,11 @@ function AppContent() {
           <Route path="partners" element={<PartnerPage />} />
           <Route path="changelog" element={<ChangelogPage />} />
           <Route path="social-stats" element={<SocialStatsPage />} />
+          <Route path="youtube-channels" element={<YouTubeChannelsPage />} />
+          <Route path="github-profiles" element={<GitHubProfilesPage />} />
+          <Route path="faq" element={<FAQPage />} />
+          <Route path="glossary" element={<GlossaryPage />} />
+          <Route path="community-guidelines" element={<CommunityGuidelinesPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route 
@@ -71,9 +81,11 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
+      <SettingsProvider> {/* Wrap AuthProvider with SettingsProvider */}
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </SettingsProvider>
     </Router>
   );
 }

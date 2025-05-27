@@ -3,64 +3,69 @@ import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Gamepad2, Code2, Lightbulb, ShieldCheck, Users, BarChart3, History, ExternalLink as PartnerIcon } from 'lucide-react';
+import { Gamepad2, Code2, Lightbulb, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const features = [
   {
-    icon: <Gamepad2 className="h-10 w-10 mb-4 text-primary" />,
+    icon: <Gamepad2 className="h-12 w-12 mb-5 text-primary" />,
     title: "Gaming-Welt",
     description: "Aktuelle News, tiefgehende Reviews und Profi-Strategien für deine Lieblingsspiele.",
     link: "/gaming",
     linkText: "Zum Gaming-Bereich",
-    imgPlaceholder: "Controller-Icon für Gaming"
   },
   {
-    icon: <Code2 className="h-10 w-10 mb-4 text-primary" />,
+    icon: <Code2 className="h-12 w-12 mb-5 text-primary" />,
     title: "Coding-Hub",
     description: "Tutorials, Projektideen und die besten Tools für Entwickler aller Erfahrungsstufen.",
     link: "/coding",
     linkText: "Zum Coding-Hub",
-    imgPlaceholder: "Code-Icon für Programmierung"
   },
   {
-    icon: <Lightbulb className="h-10 w-10 mb-4 text-primary" />,
+    icon: <Lightbulb className="h-12 w-12 mb-5 text-primary" />,
     title: "Tipps & Tricks",
     description: "Clevere Hacks für Software, Hardware und Produktivität, die deinen Alltag erleichtern.",
     link: "/tips",
     linkText: "Zu den Tipps & Tricks",
-    imgPlaceholder: "Glühbirnen-Icon für Tipps"
   },
   {
-    icon: <ShieldCheck className="h-10 w-10 mb-4 text-primary" />,
+    icon: <ShieldCheck className="h-12 w-12 mb-5 text-primary" />,
     title: "Support & Tickets",
     description: "Unser engagiertes Team hilft dir bei Fragen und Problemen. Erstelle einfach ein Ticket.",
     link: "/tickets",
     linkText: "Zum Ticketsystem",
-    imgPlaceholder: "Schild-Icon für Support"
   },
 ];
 
 const FeatureCard = ({ feature, index }) => (
   <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, y: 60, scale: 0.9 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
     viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
+    transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 1, 0.5, 1] }}
     className="h-full"
   >
-    <Card className="card-hover h-full flex flex-col border-border/50 bg-card/60 backdrop-blur-md shadow-lg hover:shadow-primary/20 transition-all duration-300 ease-out">
-      <CardHeader className="items-center text-center p-6">
-        {feature.icon}
-        <CardTitle className="text-2xl">{feature.title}</CardTitle>
+    <Card 
+      className="h-full flex flex-col border-border/50 bg-card/70 backdrop-blur-xl shadow-xl hover:shadow-primary/30 transition-all duration-300 ease-out transform hover:-translate-y-2 hover:border-primary/60"
+    >
+      <CardHeader className="items-center text-center p-8">
+        <motion.div whileHover={{ rotate: [0, -10, 10, -5, 5, 0], scale: 1.1 }} transition={{ duration:0.4 }}>
+         {feature.icon}
+        </motion.div>
+        <CardTitle className="text-2xl font-semibold">{feature.title}</CardTitle>
       </CardHeader>
-      <CardContent className="text-center flex-grow p-6 pt-0">
-        <CardDescription className="leading-relaxed min-h-[60px]">{feature.description}</CardDescription>
+      <CardContent className="text-center flex-grow px-6 pb-6">
+        <CardDescription className="leading-relaxed text-base min-h-[70px]">{feature.description}</CardDescription>
       </CardContent>
       <div className="p-6 pt-0 mt-auto">
-        <Button asChild variant="outline" className="w-full group hover:bg-primary/10 hover:border-primary transition-colors">
+        <Button 
+          asChild 
+          variant="outline" 
+          className="w-full group border-border/60 hover:border-primary/70 hover:bg-primary/10 transition-colors"
+          motionProps={{ whileHover: { scale: 1.05, y: -1 }, whileTap: { scale: 0.98 } }}
+        >
           <Link to={feature.link}>
             {feature.linkText}
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </Button>
       </div>
@@ -68,35 +73,30 @@ const FeatureCard = ({ feature, index }) => (
   </motion.div>
 );
 
-const ArrowRight = (props) => (
-  <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-    <path d="M8 4l4 4-4 4M12 8H4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
+const MemoizedFeatureCard = React.memo(FeatureCard);
 
 const FeatureSection = () => {
   return (
-    <section id="feature-section" className="py-16 md:py-24 bg-background">
+    <section id="feature-section" className="py-20 md:py-28 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12 md:mb-16"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-gradient">
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-6 text-gradient">
             Entdecke unsere Kernbereiche
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-            GameCodeHub bietet dir eine breite Palette an Informationen, Ressourcen und Community-Interaktionen.
+          <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed">
+            GameCodeHub bietet dir eine breite Palette an Informationen, Ressourcen und Community-Interaktionen für dein digitales Leben.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {features.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
+            <MemoizedFeatureCard key={feature.title} feature={feature} index={index} />
           ))}
         </div>
       </div>
@@ -104,4 +104,4 @@ const FeatureSection = () => {
   );
 };
 
-export default FeatureSection;
+export default React.memo(FeatureSection);

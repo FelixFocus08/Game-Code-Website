@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,29 +7,29 @@ const newsItems = [
     title: "Die neuesten Gaming-Trends 2025",
     date: "15. Mai 2025",
     description: "Entdecke die neuesten Trends in der Gaming-Welt, von Virtual Reality bis hin zu Cloud-Gaming und was die Zukunft für Gamer bereithält.",
-    imgSrc: "https://images.unsplash.com/photo-1511512578047-dfb367046420",
-    imgAlt: "Abstrakte Darstellung von Gaming-Trends mit Neonlichtern"
+    imgAlt: "Abstrakte Darstellung von Gaming-Trends mit Neonlichtern",
+    imageDescription: "Eine futuristische Darstellung von Gaming-Trends mit Neonlichteffekten, VR-Brillen und Cloud-Symbolen."
   },
   {
     title: "Neue Konsolengeneration angekündigt",
     date: "10. Mai 2025",
     description: "Die großen Konsolenhersteller haben ihre Pläne für die nächste Generation enthüllt. Erfahre alles über die neuen Funktionen und Spezifikationen.",
-    imgSrc: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3",
-    imgAlt: "Moderne Spielkonsole mit Controller"
+    imgAlt: "Moderne Spielkonsole mit Controller",
+    imageDescription: "Eine elegante, schwarze Spielkonsole der nächsten Generation mit einem passenden Controller davor."
   },
   {
     title: "E-Sports: Die größten Turniere 2025",
     date: "5. Mai 2025",
     description: "Ein Überblick über die wichtigsten E-Sports-Veranstaltungen des Jahres, mit Preisgeldern, Terminen und teilnehmenden Teams.",
-    imgSrc: "https://images.unsplash.com/photo-1542751371-adc38448a05e",
-    imgAlt: "E-Sports Arena mit jubelnden Zuschauern"
+    imgAlt: "E-Sports Arena mit jubelnden Zuschauern",
+    imageDescription: "Eine große E-Sports-Arena, gefüllt mit Zuschauern, die ein Team auf der Bühne anfeuern, mit bunten Lichtern."
   },
   {
     title: "Die meisterwarteten Spiele des Jahres",
     date: "1. Mai 2025",
     description: "Unsere Redaktion hat die vielversprechendsten Spieleveröffentlichungen zusammengestellt, die du in diesem Jahr nicht verpassen solltest.",
-    imgSrc: "https://images.unsplash.com/photo-1580327344181-c11ac2a975e0",
-    imgAlt: "Collage verschiedener Videospiel-Cover"
+    imgAlt: "Collage verschiedener Videospiel-Cover",
+    imageDescription: "Eine dynamische Collage aus Cover-Art verschiedener heiß erwarteter Videospiele des Jahres 2025."
   },
 ];
 
@@ -41,7 +40,7 @@ const GamingNews = () => {
         <Card key={index} className="card-hover border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden shadow-lg hover:shadow-primary/20 transition-all duration-300 ease-out">
           <CardHeader className="p-0">
             <div className="aspect-video overflow-hidden">
-              <img  src={item.imgSrc} alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+              <img  alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src="https://images.unsplash.com/photo-1675023112817-52b789fd2ef0" />
             </div>
             <div className="p-6">
               <CardTitle className="text-xl mb-1">{item.title}</CardTitle>

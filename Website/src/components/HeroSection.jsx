@@ -1,40 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Zap, Gamepad2, Code2 } from 'lucide-react';
 
 const HeroSection = () => {
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.9]); 
+  const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.4]); 
+  const yText = useTransform(scrollYProgress, [0, 0.15], [0, 70]); 
+  const yButtons = useTransform(scrollYProgress, [0, 0.15], [0, 100]); 
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 100,
+        stiffness: 120,
+        damping: 12
       },
     },
   };
 
   return (
-    <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-blue-600/10 to-background -z-10">
-        <div className="absolute inset-0 opacity-30">
-          <img  alt="Abstrakter Hintergrund mit geometrischen Mustern und leuchtenden Linien" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1691198376934-e220aa77262f" />
-        </div>
-      </div>
+    <motion.section 
+      className="relative py-24 md:py-32 lg:py-48 overflow-hidden min-h-[80vh] flex items-center"
+      style={{ scale, opacity, willChange: 'transform, opacity' }}
+    >
       
       <motion.div 
         className="container mx-auto px-4 text-center relative z-10"
@@ -42,34 +47,52 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants} className="inline-block mb-6 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/30 shadow-sm">
-          <Zap className="inline-block h-4 w-4 mr-2" /> Willkommen bei GameCodeHub!
+        <motion.div 
+            variants={itemVariants} 
+            style={{ y: yText, willChange: 'transform' }} 
+            className="inline-block mb-8 px-5 py-2.5 bg-primary/10 text-primary rounded-full text-base font-semibold border border-primary/30 shadow-lg backdrop-blur-sm"
+        >
+          <Zap className="inline-block h-5 w-5 mr-2.5 animate-pulse" /> Willkommen bei GameCodeHub!
         </motion.div>
         
         <motion.h1 
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-gradient"
+          style={{ y: yText, willChange: 'transform' }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-10 text-gradient leading-tight"
         >
           Deine Zentrale für Gaming, Code & Skills
         </motion.h1>
         
         <motion.p 
           variants={itemVariants}
-          className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed"
+          style={{ y: yText, willChange: 'transform' }}
+          className="max-w-3xl mx-auto text-lg md:text-xl lg:text-2xl text-muted-foreground mb-14 leading-relaxed"
         >
           Entdecke die neuesten Trends, meistere neue Technologien und verbinde dich mit einer passionierten Community. Alles, was du brauchst, an einem Ort.
         </motion.p>
         
         <motion.div 
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4"
+          style={{ y: yButtons, willChange: 'transform' }}
+          className="flex flex-col sm:flex-row justify-center items-center gap-5"
         >
-          <Button asChild size="lg" className="group text-lg px-8 py-3 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90">
+          <Button 
+            asChild 
+            size="xl" 
+            className="text-lg px-10 py-4 shadow-xl hover:shadow-primary/40 transition-all bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+            motionProps={{ whileHover: { scale: 1.1, y: -2 }, whileTap: { scale: 0.9 } }}
+          >
             <Link to="/register">
-              Jetzt starten <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              Jetzt starten <ArrowRight className="ml-2.5 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="text-lg px-8 py-3 shadow-md hover:shadow-lg transition-shadow border-border/50 hover:border-primary/50">
+          <Button 
+            asChild 
+            variant="outline" 
+            size="xl" 
+            className="text-lg px-10 py-4 shadow-lg hover:shadow-primary/20 transition-all border-border/60 hover:border-primary/70 backdrop-blur-sm bg-card/30 hover:bg-card/50"
+            motionProps={{ whileHover: { scale: 1.1, y: -2 }, whileTap: { scale: 0.9 } }}
+          >
             <Link to="/#feature-section">
               Mehr erfahren
             </Link>
@@ -78,25 +101,31 @@ const HeroSection = () => {
         
         <motion.div 
           variants={itemVariants} 
-          className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto"
+          style={{ y: yButtons, willChange: 'transform' }}
+          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 max-w-5xl mx-auto"
         >
           {[
-            { icon: <Gamepad2 className="h-8 w-8 text-primary" />, title: "Gaming Insights", description: "News, Reviews und Strategien." },
-            { icon: <Code2 className="h-8 w-8 text-primary" />, title: "Coding-Ressourcen", description: "Tutorials, Projekte und Tools." },
-            { icon: <Zap className="h-8 w-8 text-primary" />, title: "Skills & Tipps", description: "Hardware, Software und mehr." },
+            { icon: <Gamepad2 className="h-10 w-10 text-primary" />, title: "Gaming Insights", description: "News, Reviews und Strategien." },
+            { icon: <Code2 className="h-10 w-10 text-primary" />, title: "Coding-Ressourcen", description: "Tutorials, Projekte und Tools." },
+            { icon: <Zap className="h-10 w-10 text-primary" />, title: "Skills & Tipps", description: "Hardware, Software und mehr." },
           ].map((item, index) => (
-            <div key={index} className="p-6 bg-card/50 backdrop-blur-md rounded-xl shadow-lg border border-border/30 text-left">
-              <div className="flex items-center gap-4 mb-3">
+            <motion.div 
+              key={index} 
+              className="p-6 bg-card/40 backdrop-blur-lg rounded-2xl shadow-xl border border-border/40 text-left hover:bg-card/60 transition-colors duration-300"
+              whileHover={{ y: -8, boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
+              style={{ willChange: 'transform, box-shadow' }}
+            >
+              <div className="flex items-center gap-5 mb-4">
                 {item.icon}
-                <h3 className="text-xl font-semibold text-foreground">{item.title}</h3>
+                <h3 className="text-2xl font-semibold text-foreground">{item.title}</h3>
               </div>
-              <p className="text-muted-foreground text-sm">{item.description}</p>
-            </div>
+              <p className="text-muted-foreground text-base">{item.description}</p>
+            </motion.div>
           ))}
         </motion.div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);

@@ -4,31 +4,36 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { X, Send, Bot, User, MessageSquare } from "lucide-react";
+import { X, Send, Bot, User, MessageSquare, HelpCircle, BookOpen, Users } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const botResponses = {
   "hallo": "Hallo! Wie kann ich dir heute helfen?",
-  "hilfe": "Gerne! Was ist dein Problem? Du kannst nach 'Passwort vergessen', 'Account gesperrt' oder 'Problem melden' fragen.",
+  "hilfe": "Gerne! Was ist dein Problem? Du kannst nach 'Passwort vergessen', 'Account gesperrt', 'Problem melden', 'FAQ', 'Glossar' oder 'Community Richtlinien' fragen.",
   "passwort vergessen": "Kein Problem. Um dein Passwort zurückzusetzen, gehe bitte zu [Link zur Passwort-Reset-Seite einfügen] und folge den Anweisungen.",
   "account gesperrt": "Ich verstehe. Bitte kontaktiere unseren Support direkt über das Ticketsystem, damit wir deinen Account überprüfen können.",
-  "problem melden": "Bitte beschreibe dein Problem so detailliert wie möglich. Welche Schritte hast du bereits unternommen?",
+  "problem melden": "Bitte beschreibe dein Problem so detailliert wie möglich. Welche Schritte hast du bereits unternommen? Du kannst auch ein Ticket erstellen.",
   "danke": "Gern geschehen! Wenn du weitere Fragen hast, sag einfach Bescheid.",
-  "gaming": "Gaming ist super! Hast du eine spezifische Frage zu einem Spiel, Hardware oder Einstellungen?",
-  "coding": "Coding kann knifflig sein. Suchst du nach Tutorials, Ressourcen oder hast du ein spezifisches Programmierproblem?",
-  "tipps": "Wir haben viele Tipps & Tricks! Zu welchem Thema suchst du Ratschläge: Gaming, Coding, Hardware oder Software?",
+  "gaming": "Gaming ist super! Hast du eine spezifische Frage zu einem Spiel, Hardware oder Einstellungen? Schau auch mal in unsere <a href='/gaming' class='text-primary hover:underline'>Gaming-Sektion</a> oder die <a href='/faq' class='text-primary hover:underline'>FAQ</a>.",
+  "coding": "Coding kann knifflig sein. Suchst du nach Tutorials, Ressourcen oder hast du ein spezifisches Programmierproblem? Besuche unsere <a href='/coding' class='text-primary hover:underline'>Coding-Sektion</a> oder das <a href='/glossary' class='text-primary hover:underline'>Glossar</a>.",
+  "tipps": "Wir haben viele Tipps & Tricks! Zu welchem Thema suchst du Ratschläge: Gaming, Coding, Hardware oder Software? Schau auf unserer <a href='/tips' class='text-primary hover:underline'>Tipps-Seite</a> vorbei.",
   "discord": "Unseren Discord-Server findest du hier: https://discord.gg/6ZPskNPHXC. Tritt gerne bei!",
-  "default": "Das habe ich leider nicht verstanden. Kannst du es anders formulieren? Du kannst auch 'Hilfe' eingeben, um Optionen zu sehen."
+  "faq": "Unsere <a href='/faq' class='text-primary hover:underline'>FAQ-Seite</a> beantwortet viele häufig gestellte Fragen. Schau doch mal rein!",
+  "glossar": "Begriffe unklar? Unser <a href='/glossary' class='text-primary hover:underline'>Glossar</a> erklärt wichtige Begriffe aus Gaming und Coding.",
+  "community richtlinien": "Für ein faires Miteinander haben wir <a href='/community-guidelines' class='text-primary hover:underline'>Community-Richtlinien</a>. Bitte lies sie dir durch.",
+  "default": "Das habe ich leider nicht verstanden. Kannst du es anders formulieren? Du kannst auch 'Hilfe' eingeben, um Optionen zu sehen oder eine der Fragen unten auswählen."
 };
 
 const predefinedQuestions = [
-  { id: "q1", text: "Wie setze ich mein Passwort zurück?" },
-  { id: "q2", text: "Wo finde ich Tutorials zum Coden?" },
-  { id: "q3", text: "Hilfe bei Gaming-Hardware?" },
-  { id: "q4", text: "Link zum Discord Server?" },
+  { id: "q1", text: "Passwort vergessen?", query: "passwort vergessen" },
+  { id: "q2", text: "Was steht in der FAQ?", query: "faq" },
+  { id: "q3", text: "Coding-Begriffe erklärt?", query: "glossar" },
+  { id: "q4", text: "Community Regeln?", query: "community richtlinien" },
+  { id: "q5", text: "Link zum Discord Server?", query: "discord" },
 ];
 
-const SupportBot = ({ onClose }) => {
+const SupportBot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Hallo! Ich bin dein Support-Assistent. Wie kann ich dir helfen? Du kannst eine Frage stellen oder eine der Optionen unten wählen." }
   ]);
@@ -64,7 +69,6 @@ const SupportBot = ({ onClose }) => {
       }
     }
     
-    // Simulate bot thinking
     setTimeout(() => {
       const botMessage = { sender: "bot", text: botReplyText };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
@@ -82,14 +86,7 @@ const SupportBot = ({ onClose }) => {
     handleSendMessage(inputValue);
   };
 
-  const handlePredefinedQuestionClick = (questionText) => {
-    // Modify question text to trigger specific bot responses if needed
-    let query = questionText;
-    if (questionText.toLowerCase().includes("passwort")) query = "passwort vergessen";
-    if (questionText.toLowerCase().includes("coden") || questionText.toLowerCase().includes("tutorials")) query = "coding";
-    if (questionText.toLowerCase().includes("gaming-hardware")) query = "gaming";
-    if (questionText.toLowerCase().includes("discord")) query = "discord";
-    
+  const handlePredefinedQuestionClick = (query) => {
     handleSendMessage(query);
   };
 
@@ -138,9 +135,8 @@ const SupportBot = ({ onClose }) => {
                           ? "bg-primary text-primary-foreground rounded-br-none"
                           : "bg-muted text-muted-foreground rounded-bl-none"
                       }`}
-                    >
-                      {msg.text}
-                    </div>
+                      dangerouslySetInnerHTML={{ __html: msg.text }} 
+                    />
                     {msg.sender === "user" && (
                       <Avatar className="h-8 w-8">
                         <AvatarFallback>
@@ -161,7 +157,7 @@ const SupportBot = ({ onClose }) => {
                             key={q.id} 
                             variant="outline" 
                             size="sm" 
-                            onClick={() => handlePredefinedQuestionClick(q.text)}
+                            onClick={() => handlePredefinedQuestionClick(q.query)}
                             className="text-xs"
                         >
                             {q.text}

@@ -1,11 +1,12 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Moon, Sun, Github, Twitter, Twitch, LogIn, LogOut, UserPlus, ShieldCheck, Users, History, BarChart3 } from "lucide-react";
+import { Menu, X, Github, Instagram, Twitch, LogIn, LogOut, UserPlus, ShieldCheck, Users, History, BarChart3, Youtube as YoutubeIcon, MessageSquare as MessageSquareIcon, HelpCircle, BookOpen } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSettings } from "@/contexts/SettingsContext";
+import SettingsMenu from "@/components/SettingsMenu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,26 +19,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
 const Navbar = ({ toggleSidebar }) => {
-  const [darkMode, setDarkMode] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { settings } = useSettings(); 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedDarkMode = localStorage.getItem('darkMode');
-    if (storedDarkMode) {
-      const newDarkModeState = storedDarkMode === 'true';
-      setDarkMode(newDarkModeState);
-      if (!newDarkModeState) {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
-    } else {
-       document.documentElement.classList.add('dark'); 
-    }
-
+  React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -46,16 +34,6 @@ const Navbar = ({ toggleSidebar }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleDarkMode = () => {
-    const newDarkModeState = !darkMode;
-    setDarkMode(newDarkModeState);
-    localStorage.setItem('darkMode', newDarkModeState.toString());
-    if (newDarkModeState) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
 
   const handleLogout = () => {
     logout();
@@ -74,6 +52,10 @@ const Navbar = ({ toggleSidebar }) => {
     { name: "Partner", path: "/partners", icon: <Users className="mr-2 h-4 w-4" /> },
     { name: "Changelog", path: "/changelog", icon: <History className="mr-2 h-4 w-4" /> },
     { name: "Social Stats", path: "/social-stats", icon: <BarChart3 className="mr-2 h-4 w-4" /> },
+    { name: "YouTube Kanäle", path: "/youtube-channels", icon: <YoutubeIcon className="mr-2 h-4 w-4" /> },
+    { name: "FAQ", path: "/faq", icon: <HelpCircle className="mr-2 h-4 w-4" /> },
+    { name: "Glossar", path: "/glossary", icon: <BookOpen className="mr-2 h-4 w-4" /> },
+    { name: "Community Richtlinien", path: "/community-guidelines", icon: <MessageSquareIcon className="mr-2 h-4 w-4" /> },
   ];
 
   return (
@@ -130,7 +112,7 @@ const Navbar = ({ toggleSidebar }) => {
           </DropdownMenu>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
           <div className="hidden md:flex items-center gap-2">
             <a
               href="https://github.com"
@@ -142,16 +124,16 @@ const Navbar = ({ toggleSidebar }) => {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://instagram.com/felig0r"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Twitter Profil"
+              aria-label="Instagram Profil"
             >
-              <Twitter className="h-5 w-5" />
+              <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="https://twitch.tv"
+              href="https://twitch.tv/fel1g0r"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -159,6 +141,13 @@ const Navbar = ({ toggleSidebar }) => {
             >
               <Twitch className="h-5 w-5" />
             </a>
+            <Link
+              to="/youtube-channels"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="YouTube Kanäle"
+            >
+              <YoutubeIcon className="h-5 w-5" />
+            </Link>
             <a
               href="https://discord.gg/6ZPskNPHXC"
               target="_blank"
@@ -170,9 +159,8 @@ const Navbar = ({ toggleSidebar }) => {
             </a>
           </div>
           
-          <Button variant="ghost" size="icon" onClick={toggleDarkMode} aria-label="Dark Mode umschalten">
-            {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
+          <SettingsMenu />
+
 
           {user ? (
             <DropdownMenu>
@@ -208,15 +196,15 @@ const Navbar = ({ toggleSidebar }) => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/login">
-                  <LogIn className="mr-2 h-4 w-4" /> Login
+                  <LogIn className="mr-1 sm:mr-2 h-4 w-4" /> Login
                 </Link>
               </Button>
               <Button variant="default" size="sm" asChild className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 <Link to="/register">
-                  <UserPlus className="mr-2 h-4 w-4" /> Registrieren
+                  <UserPlus className="mr-1 sm:mr-2 h-4 w-4" /> Registrieren
                 </Link>
               </Button>
             </div>

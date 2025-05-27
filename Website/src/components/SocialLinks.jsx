@@ -1,42 +1,43 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Twitter, Twitch, Youtube, Twitch as Discord, Linkedin } from 'lucide-react';
+import { Github, Instagram, Twitch, Youtube, Linkedin } from 'lucide-react';
+import { FaDiscord } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const socialLinks = [
+const socialLinksData = [
   {
-    name: "GitHub",
-    url: "https://github.com",
+    name: "GitHub Profile",
+    internalPath: "/github-profiles",
     icon: <Github className="h-8 w-8" />,
     description: "Entdecke unsere Open-Source-Projekte und trage zu unserer Community bei.",
     color: "bg-gray-800 hover:bg-gray-700",
   },
   {
-    name: "Twitter",
-    url: "https://twitter.com",
-    icon: <Twitter className="h-8 w-8" />,
+    name: "Instagram",
+    url: "https://instagram.com/felig0r",
+    icon: <Instagram className="h-8 w-8" />,
     description: "Folge uns für die neuesten Updates, Tipps und Ankündigungen.",
-    color: "bg-blue-500 hover:bg-blue-600",
+    color: "bg-pink-500 hover:bg-pink-600",
   },
   {
     name: "Twitch",
-    url: "https://twitch.tv",
+    url: "https://twitch.tv/fel1g0r",
     icon: <Twitch className="h-8 w-8" />,
     description: "Schau dir unsere Live-Streams zu Gaming und Coding an.",
     color: "bg-purple-600 hover:bg-purple-700",
   },
   {
-    name: "YouTube",
-    url: "https://youtube.com",
+    name: "YouTube Kanäle",
+    internalPath: "/youtube-channels",
     icon: <Youtube className="h-8 w-8" />,
-    description: "Tutorials, Gameplay und Coding-Sessions auf unserem Kanal.",
+    description: "Tutorials, Gameplay und Coding-Sessions auf unseren Kanälen.",
     color: "bg-red-600 hover:bg-red-700",
   },
   {
     name: "Discord",
-    url: "https://discord.com",
-    icon: <Discord className="h-8 w-8" />,
+    url: "https://discord.gg/6ZPskNPHXC",
+    icon: <FaDiscord className="h-8 w-8" />,
     description: "Tritt unserer Community bei und tausche dich mit Gleichgesinnten aus.",
     color: "bg-indigo-600 hover:bg-indigo-700",
   },
@@ -90,29 +91,48 @@ const SocialLinks = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {socialLinks.map((link, index) => (
+          {socialLinksData.map((link, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <a 
-                href={link.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block h-full"
-              >
-                <Card className="h-full card-hover border-border/50 bg-card/50 overflow-hidden">
-                  <div className={`h-2 w-full ${link.color}`}></div>
-                  <CardHeader className="flex flex-row items-center gap-4">
-                    <div className={`rounded-full p-2 ${link.color} text-white`}>
-                      {link.icon}
-                    </div>
-                    <CardTitle>{link.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-muted-foreground">
-                      {link.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </a>
+              {link.internalPath ? (
+                <Link to={link.internalPath} className="block h-full">
+                  <Card className="h-full card-hover border-border/50 bg-card/50 overflow-hidden">
+                    <div className={`h-2 w-full ${link.color}`}></div>
+                    <CardHeader className="flex flex-row items-center gap-4">
+                      <div className={`rounded-full p-2 ${link.color} text-white`}>
+                        {link.icon}
+                      </div>
+                      <CardTitle>{link.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-muted-foreground">
+                        {link.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ) : (
+                <a 
+                  href={link.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                >
+                  <Card className="h-full card-hover border-border/50 bg-card/50 overflow-hidden">
+                    <div className={`h-2 w-full ${link.color}`}></div>
+                    <CardHeader className="flex flex-row items-center gap-4">
+                      <div className={`rounded-full p-2 ${link.color} text-white`}>
+                        {link.icon}
+                      </div>
+                      <CardTitle>{link.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-muted-foreground">
+                        {link.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </a>
+              )}
             </motion.div>
           ))}
         </motion.div>

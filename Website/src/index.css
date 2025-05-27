@@ -5,57 +5,51 @@
 
 @layer base {
   :root {
-    --background: 220 20% 9%; /* Dunklerer Hintergrund */
-    --foreground: 210 40% 98%;
-    
-    --card: 220 20% 13%; /* Etwas hellere Karten */
-    --card-foreground: 210 40% 98%;
-    
-    --popover: 220 20% 9%;
-    --popover-foreground: 210 40% 98%;
-    
-    --primary: 260 100% 70%; /* Lebendigeres Primärblau/Lila */
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: 220 15% 25%; /* Gedämpftes Sekundär */
-    --secondary-foreground: 210 40% 98%;
-    
-    --muted: 220 15% 20%; /* Dunkleres Muted */
-    --muted-foreground: 220 10% 60%; /* Helleres Muted Foreground */
-    
-    --accent: 220 15% 25%;
-    --accent-foreground: 210 40% 98%;
-    
-    --destructive: 0 70% 55%; /* Intensiveres Rot */
+    /* Light Mode (Default) */
+    --background: 0 0% 100%; /* White */
+    --foreground: 222.2 84% 4.9%; /* Dark Blue/Black for text */
+    --card: 0 0% 96%; /* Light gray for cards */
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 217.2 91.2% 52.8%; /* Brighter blue for primary */
+    --primary-foreground: 0 0% 98%; /* White text on primary */
+    --secondary: 0 0% 93.1%; /* Lighter gray for secondary elements */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* Dark text on secondary */
+    --muted: 0 0% 90.9%; /* Muted color */
+    --muted-foreground: 215 20.2% 45.1%; /* Darker muted text */
+    --accent: 0 0% 87.1%; /* Accent color */
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%; /* Bright red for destructive */
     --destructive-foreground: 0 0% 98%;
-    
-    --border: 220 15% 20%; /* Dunklere Grenze */
-    --input: 220 15% 18%; /* Dunklere Eingabefelder */
-    --ring: 260 100% 75%; /* Ringfarbe passend zu Primary */
-    
-    --radius: 0.75rem; /* Etwas größerer Radius für weichere Kanten */
+    --border: 0 0% 89.8%; /* Subtle border color */
+    --input: 0 0% 89.8%; /* Input background */
+    --ring: 217.2 91.2% 59.8%; /* Ring color for focus states */
+    --radius: 0.5rem;
+    --text-primary-animated-icon: 217.2 91.2% 52.8%; /* for animated background icons */
   }
 
   .dark {
-    --background: 220 20% 9%;
-    --foreground: 210 40% 98%;
-    --card: 220 20% 13%;
+    --background: 222.2 84% 4.9%; /* Deep, dark blue */
+    --foreground: 210 40% 98%; /* Off-white for text */
+    --card: 222.2 74% 6.5%; /* Slightly lighter card background for depth */
     --card-foreground: 210 40% 98%;
-    --popover: 220 20% 9%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 260 100% 70%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 220 15% 25%;
+    --primary: 217.2 91.2% 59.8%; /* Vibrant blue for primary actions */
+    --primary-foreground: 222.2 47.4% 11.2%; /* Dark text on primary buttons */
+    --secondary: 217.2 32.6% 17.5%; /* Darker shade for secondary elements */
     --secondary-foreground: 210 40% 98%;
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 60%;
-    --accent: 220 15% 25%;
+    --muted: 217.2 32.6% 22.5%; /* Muted color, slightly lighter than secondary */
+    --muted-foreground: 215 20.2% 65.1%; /* Lighter muted text */
+    --accent: 217.2 32.6% 27.5%; /* Accent color, can be used for highlights */
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 70% 55%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 15% 20%;
-    --input: 220 15% 18%;
-    --ring: 260 100% 75%;
+    --destructive: 0 72.2% 50.6%; /* Bright red for destructive actions */
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%; /* Subtle border color */
+    --input: 217.2 32.6% 17.5%; /* Input background */
+    --ring: 224.3 76.3% 48%; /* Ring color for focus states */
+    --text-primary-animated-icon: 217.2 91.2% 59.8%; /* for animated background icons */
   }
 }
 
@@ -66,107 +60,94 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-.text-gradient {
-  background: linear-gradient(to right, hsl(var(--primary)), hsl(280, 87%, 65%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.card-hover {
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-
-.card-hover:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 28px -8px hsla(var(--primary), 0.3), 0 4px 8px -6px hsla(var(--primary), 0.2);
-}
-
-.glass-effect {
-  background: hsla(var(--background), 0.7); /* Angepasst an Theme-Farben */
-  backdrop-filter: blur(10px) saturate(180%);
-  border-bottom: 1px solid hsla(var(--border), 0.5);
-}
-
-.link-hover {
-  position: relative;
-  padding-bottom: 2px; /* Platz für die Linie */
-}
-
-.link-hover::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0; /* Linie direkt unter dem Text */
-  left: 50%; /* Startet in der Mitte */
-  transform: translateX(-50%); /* Zentriert die Linie */
-  background: linear-gradient(to right, hsl(var(--primary)), hsl(280, 87%, 65%));
-  transition: width 0.3s ease-out;
-}
-
-.link-hover:hover::after {
-  width: 100%;
-}
-
-/* Animationen für das Hero Section Bild */
-.animate-blob {
-  animation: blob 7s infinite;
-}
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-@keyframes blob {
-  0% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.7;
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600;
   }
-  33% {
-    transform: scale(1.1) translate(20px, -30px);
-    opacity: 0.5;
+  /* Explicit light mode gradient, if different from primary to purple-600 */
+  .light .text-gradient {
+     @apply bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500;
   }
-  66% {
-    transform: scale(0.9) translate(-15px, 25px);
-    opacity: 0.6;
+  .dark .text-gradient {
+     @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
   }
-  100% {
-    transform: scale(1) translate(0, 0);
-    opacity: 0.7;
+
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-lg border-b border-border/50 shadow-md transition-colors duration-300;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  .card-hover:hover {
+    @apply shadow-lg ring-1 ring-primary/50;
+  }
+  .dark .card-hover:hover {
+    @apply shadow-primary/20 ring-1 ring-primary/70;
+  }
+  
+  .link-hover {
+    @apply relative after:absolute after:bg-primary after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30; 
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/60;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+
+  /* Button hover effects (base - can be overridden by motion props) */
+  .btn-primary-hover {
+    @apply hover:bg-primary/90;
+  }
+  .btn-secondary-hover {
+    @apply hover:bg-secondary/90;
+  }
+  .btn-outline-hover {
+     @apply hover:bg-accent hover:text-accent-foreground;
+  }
+
+  /* Input focus styles */
+  .input-focus {
+    @apply focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200;
+  }
+
+  /* Animation for pulsing elements */
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 5s linear infinite;
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 }
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.7);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Button Hover Effect */
-.btn-shine:hover {
-  box-shadow: 0 0 15px 3px hsla(var(--primary), 0.5);
-}
-

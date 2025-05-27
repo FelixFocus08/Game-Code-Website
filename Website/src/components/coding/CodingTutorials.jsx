@@ -9,8 +9,8 @@ const tutorialItems = [
   {
     title: "React für Einsteiger: Dein erstes Projekt",
     description: "Lerne die Grundlagen von React, erstelle Komponenten und manage State in deinem ersten interaktiven Webprojekt.",
-    imgSrc: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2",
     imgAlt: "React Logo auf abstraktem Hintergrund",
+    imageDescription: "Das React-Logo leuchtet blau auf einem dunklen, abstrakten Hintergrund mit Code-Fragmenten.",
     tags: ["React", "JavaScript", "Frontend"],
     duration: "2 Std.",
     level: "Einsteiger",
@@ -19,8 +19,8 @@ const tutorialItems = [
   {
     title: "Python Masterclass: Von Null zum Profi",
     description: "Ein umfassender Kurs, der dich von den Python-Grundlagen bis zu fortgeschrittenen Konzepten wie OOP und Datenanalyse führt.",
-    imgSrc: "https://images.unsplash.com/photo-1526379095098-d676bdb09bf1",
     imgAlt: "Python Code auf einem dunklen Bildschirm",
+    imageDescription: "Ein Monitor zeigt Python-Codezeilen mit farbiger Syntaxhervorhebung auf einem dunklen Theme.",
     tags: ["Python", "Backend", "Data Science"],
     duration: "10 Std.",
     level: "Alle Level",
@@ -29,8 +29,8 @@ const tutorialItems = [
   {
     title: "Node.js & Express: Baue deine erste API",
     description: "Erstelle eine performante REST-API mit Node.js und dem Express-Framework. Inklusive Datenbankanbindung.",
-    imgSrc: "https://images.unsplash.com/photo-1618423720997-989a9eba3a6f",
     imgAlt: "Node.js Logo und Server-Infrastruktur Grafik",
+    imageDescription: "Das Node.js-Logo ist neben einer stilisierten Darstellung von Server-Racks und Netzwerkverbindungen abgebildet.",
     tags: ["Node.js", "Express", "API", "Backend"],
     duration: "4 Std.",
     level: "Fortgeschritten",
@@ -39,8 +39,8 @@ const tutorialItems = [
   {
     title: "TailwindCSS: Modernes UI-Design meistern",
     description: "Lerne, wie du mit TailwindCSS schnell ansprechende und responsive User Interfaces erstellst, ohne CSS zu verlassen.",
-    imgSrc: "https://images.unsplash.com/photo-1643428787835-944fca7011b3",
     imgAlt: "TailwindCSS Logo mit Farbpalette",
+    imageDescription: "Das TailwindCSS-Logo schwebt über einer Palette von Blautönen, die typisch für das Framework sind.",
     tags: ["TailwindCSS", "CSS", "Frontend", "UI/UX"],
     duration: "3 Std.",
     level: "Einsteiger",
@@ -55,7 +55,7 @@ const CodingTutorials = () => {
         <Card key={index} className="card-hover border-border/50 bg-card/70 backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-primary/20 transition-all duration-300 ease-out flex flex-col group transform hover:-translate-y-1">
           <CardHeader className="p-0 relative">
             <div className="aspect-video overflow-hidden">
-              <img  src={item.imgSrc} alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://images.unsplash.com/photo-1699885960867-56d5f5262d38" />
+              <img  alt={item.imgAlt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://images.unsplash.com/photo-1697256200022-f61abccad430" />
             </div>
             <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
                 <CardTitle className="text-xl text-white group-hover:text-primary transition-colors">{item.title}</CardTitle>
